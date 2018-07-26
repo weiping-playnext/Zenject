@@ -1,6 +1,36 @@
 
 # <a id="release-notes"></a>Release Notes
 
+## Version 7.0.0 (July 19, 2018)
+
+Upgraded project to 2018.1.  Created an LTS branch of zenject to maintain support for Unity 2017.x
+
+- Fixed IL2CPP issue with 2018.2
+- Fixed issue with the asmdef files failing to generate a valid solution
+
+## Version 6.2.1 (July 19, 2018)
+
+Hotfix release for issue with testframework
+
+- Changed to have all the test helper classes in one place underneath OptionalExtras/TestFramework and also fixed to not place it in a zip
+- Fixed rare issue when instantiating prefabs in ZenjectUnitTestFixture (#506)
+
+## Version 6.2.0 (July 18, 2018)
+
+Bug fixes and some minor extensions
+
+- Added back IInstantiator interface to be used as an alternative to directly injecting DiContainer
+- Added unity project management asmdef files
+- Fixed compiler warning about missing assignment for Inject fields when using Rider IDE (#483)
+- Fixed to support signals defined as structs instead of classes
+- Added optional signals support to the non unity zenject dll build
+- Fixed BindSignal to support mapping to multiple bindings at once
+- Fixed support for UWP platform with .NET scripting backend
+
+## Version 6.1.1 (June 18, 2018)
+
+Hotfix for exception in SceneContext inspector editor
+
 ## Version 6.1.0 (June 17, 2018)
 
 Large release with lots of new features, bug fixes, and performance improvements.  Some API changes to be aware of before upgrading.  See the <a href="../README.md#upgrading-from-zenject5">upgrade guide</a> for details

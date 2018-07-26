@@ -46,8 +46,10 @@ class Runner:
             sys.exit(1)
 
     def _runBuilds(self):
-        self._log.heading("Clearing output directory")
-        self._sys.clearDirectoryContents('[OutputRootDir]')
+
+        if self._args.clearOutput:
+            self._log.heading("Clearing output directory")
+            self._sys.clearDirectoryContents('[OutputRootDir]')
 
         if self._args.buildType == 'all' or self._args.buildType == 'win35':
             self._log.heading("Building windows 3.5")
@@ -93,6 +95,7 @@ class Runner:
             self._log.heading("Building WebGl")
             self._platform = Platforms.WebGl
             self._createBuild()
+            self._sys.copyFile('[WebGlTemplate]', '[OutputRootDir]/WebGl/Web.config')
 
         # TODO
         #self._log.heading("Building Ios")
@@ -188,7 +191,7 @@ def installBindings():
             'TempDir': '[RootDir]/Temp',
             'WebGlTemplate': '[ScriptDir]/web_config_template.xml',
             'OutputRootDir': '[RootDir]/SampleBuilds',
-            'UnityExePath': 'D:/Utils/Unity/Unity2017.4.0f1/Editor/Unity.exe',
+            'UnityExePath': 'D:/Utils/Unity/Installs/2018.1.0f2/Editor/Unity.exe',
             'LogPath': '[BuildDir]/Log.txt',
             'UnityProjectPath': '[RootDir]/UnityProject',
             'MsBuildExePath': 'C:/Windows/Microsoft.NET/Framework/v4.0.30319/msbuild.exe'
@@ -219,6 +222,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Create Sample')
     parser.add_argument('-ou', '--openUnity', action='store_true', help='')
+    parser.add_argument('-c', '--clearOutput', action='store_true', help='')
     parser.add_argument('-rt', '--runTests', action='store_true', help='')
     parser.add_argument('-rb', '--runBuilds', action='store_true', help='')
     parser.add_argument('-t', '--buildType', type=str, default='win35', choices=['win35', 'win46', 'wsa35', 'wsa46', 'wsa46il2cpp', 'wsa35il2cpp', 'webgl', 'all'], help='')
